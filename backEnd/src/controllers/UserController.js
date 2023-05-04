@@ -1,9 +1,9 @@
-const User = require('../models/User');
+const User = require('../models/UserModel');
 
 // Create a new user
 const createUser = async (req, res) => {
   try {
-    const { name, email, password } = req.boy;
+    const { name, email, password } = req.body;
 
     const newUser = await User.create({ name, email, password });
 

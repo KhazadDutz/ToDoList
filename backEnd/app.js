@@ -1,18 +1,14 @@
 
 const express = require("express");
-const router = express.Router();
 const sequelize = require('./config/database');
+const usersRoutes = require('./src/routes/UserRoutes');
 
 const app = express();
 app.use(express.json());
 
 const PORT = process.env.PORT || 3001;
 
-
-
-app.get("/test", (req, res) => {
-  res.json({ message: "Hello from Server!"});
-});
+app.use('/users', usersRoutes);
 
 async function startServer() {
   try {
