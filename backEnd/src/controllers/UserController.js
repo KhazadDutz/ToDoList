@@ -18,6 +18,23 @@ const createUser = async (req, res) => {
   }
 };
 
+const deleteUser = async(req, res) => {
+  try {
+    const { email, password } = req.body
+
+    await User.deleteUser({email, password});
+
+    return res.status(200).json({
+      success: true,
+      message: 'User deleted successfully'
+    });
+  } catch (error) {
+    console.error(error.message)
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
 module.exports = {
-  createUser
+  createUser,
+  deleteUser,
 }

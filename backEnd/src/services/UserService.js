@@ -1,8 +1,10 @@
 const User = require('../models/UserModel');
+const { Op } = require('sequelize');
+
 
 const createUser = async (user) => {
   try {
-    const { success } = await findUserByName(user.name);
+    const { success } = await findUser(user);
     if (success) {
       throw new Error('User already registered');
     }
@@ -14,10 +16,35 @@ const createUser = async (user) => {
   };
 };
 
-
-const findUserByName = async (name) => {
+const deleteUser = async(user) => {
   try {
-    const foundUser = await User.findOne({ where: {name} });
+    const deletedUser = await User.destroy({
+      where: {
+        [Op.and]: [
+          {email: user.email},
+          {password: user.password}
+        ]
+      }
+    });
+
+    if (!deletedUser) {
+      throw new Error('User not found');
+    };
+
+    return { success: true, message: 'User deleted successfully' };
+  } catch (error) {
+    console.error(`Error deleting user: ${error.message}`);
+    throw new Error(`Failed to delete user: ${error.message}`);
+  }
+};
+
+const findUser = async (user) => {
+  try {
+    const foundUser = await User.findOne({ 
+      where: {
+        [Op.or]: [{name: user.name}, {email: user.email}]
+      }
+    });
     if (!foundUser) {
       return { 
         success: false,
@@ -36,5 +63,6 @@ const findUserByName = async (name) => {
 };
 
 module.exports = {
-  createUser
+  createUser,
+  deleteUser
 }
