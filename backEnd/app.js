@@ -3,10 +3,12 @@ const express = require("express");
 const sequelize = require('./config/database');
 const usersRoutes = require('./src/routes/UserRoutes');
 
+require('dotenv').config();
+
 const app = express();
 app.use(express.json());
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 app.use('/users', usersRoutes);
 
