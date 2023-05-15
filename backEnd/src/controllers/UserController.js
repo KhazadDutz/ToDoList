@@ -6,6 +6,7 @@ const createUser = async (req, res) => {
     const { name, email, password } = req.body;
     
     const newUser = await User.createUser({ name, email, password });
+    console.log(newUser, "é nois que voa bruxao");
     
     return res.status(201).json({ 
       success: true,
