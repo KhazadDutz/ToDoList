@@ -14,12 +14,12 @@ const createUser = async (req, res) => {
       data: newUser
     });
   } catch (error) {
-    console.error(error.message)
+    console.error(error.message);
     return res.status(500).json({ success: false, error: error.message });
   }
 };
 
-const deleteUser = async(req, res) => {
+const deleteUser = async (req, res) => {
   try {
     const { email, password } = req.body
 
@@ -30,7 +30,23 @@ const deleteUser = async(req, res) => {
       message: 'User deleted successfully'
     });
   } catch (error) {
-    console.error(error.message)
+    console.error(error.message);
+    return res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+const updateUser = async (req, res) => {
+  try {
+    const { email, password, dataToUpdate } = req.body;
+
+    await User.updateUser({});
+
+    return res.status(200).json({ 
+      success: true,
+      message: 'User updated successfully'
+    });
+  } catch (error) {
+    console.error(error.message);
     return res.status(500).json({ success: false, error: error.message });
   }
 };
@@ -38,4 +54,5 @@ const deleteUser = async(req, res) => {
 module.exports = {
   createUser,
   deleteUser,
+  updateUser
 }
