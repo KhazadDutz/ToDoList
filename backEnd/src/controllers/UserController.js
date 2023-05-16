@@ -39,7 +39,7 @@ const updateUser = async (req, res) => {
   try {
     const { email, password, dataToUpdate } = req.body;
 
-    await User.updateUser({});
+    await User.updateUser({ email, password, dataToUpdate });
 
     return res.status(200).json({ 
       success: true,

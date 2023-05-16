@@ -1,8 +1,21 @@
 const { Sequelize } = require('sequelize');
+const dbConfig = require('./config');
 
-const sequelize = new Sequelize('to_do_list', 'root', 'D3k0@k4Tch4n', {
-  host: 'localhost',
-  dialect: 'mysql'
+console.log(dbConfig.username)
+console.log(dbConfig.password)
+console.log(dbConfig.database)
+console.log(dbConfig.host)
+console.log(dbConfig.dialect)
+
+const username = dbConfig.username;
+const password = dbConfig.password;
+const database = dbConfig.database;
+const host = dbConfig.host;
+const dialect = dbConfig.dialect;
+
+const sequelize = new Sequelize(database, username, password, {
+  host: host,
+  dialect: dialect
 });
 
 module.exports = sequelize;
