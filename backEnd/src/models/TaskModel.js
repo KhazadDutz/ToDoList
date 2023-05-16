@@ -1,43 +1,37 @@
 const { DataTypes } = require('sequelize');
 const sequelize = require('../../config/database');
 
-const User = sequelize.define('user', 
+const Task = sequelize.define('task', 
   {
     id: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true
+      primaryKey:true
     },
-    name: {
+    title: {
       type: DataTypes.STRING,
       allowNull: false
     },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    password: {
+    content: {
       type: DataTypes.STRING,
       allowNull: false
     },
     createdAt: {
       type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP'),
     },
     updatedAt: {
       type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: DataTypes.NOW
-    }
+      defaultValue: sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'),
+    },
   },
   {
-    tableName: 'Users'
+    tableName: 'Tasks'
   }
 );
 
-User.associate = (models) => {
-  User.hasMany(models.Tasks, { foreignKey: 'userId' });
+Task.associate = (models) => {
+  Task.belongsTo(models.User, { foreignKey: 'userId' });
 };
 
 module.exports = User;
