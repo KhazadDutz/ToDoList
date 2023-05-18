@@ -43,7 +43,9 @@ describe('Unit tests from User Services', () => {
   //Testes realacionados à procura de usuário(s)
   describe('When a User is found successfully', () => {
     it('should return the users data', async () => {
+        //Creates a new user
         await userServices.createUser(newUser);
+        //Search for that same user
         const res = await userServices.findUser(newUser);
 
         expect(res).to.be.an('object');
@@ -53,6 +55,8 @@ describe('Unit tests from User Services', () => {
   });
   describe('When a User is not found successfully', () => {
     it('should return an object with property success: false', async () => {
+
+      //The beforeEach has already deleted all rows from the DB
       const res = await userServices.findUser(newUser);
 
       expect(res).to.be.an('object');
