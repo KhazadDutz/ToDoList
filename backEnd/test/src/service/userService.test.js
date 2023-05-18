@@ -15,7 +15,7 @@ describe('Unit tests from User Services', () => {
   });
   
   //Testes relacionados à criação de um usuário
-  describe('When a user is created successfully:', () => {
+  describe('When a User is created successfully:', () => {
     it('should return an object with {success: true}', async () => {
       const res = await userServices.createUser(newUser);
       expect(res).to.be.an("object");
@@ -23,7 +23,7 @@ describe('Unit tests from User Services', () => {
     });
   })
   
-  describe('When a user is not created successfully:', () => {
+  describe('When a User is not created successfully:', () => {
     it('should throw an Error, when the user is already registered', async () => {
       //Primeira inserção no DB
       await userServices.createUser(newUser);
@@ -41,7 +41,7 @@ describe('Unit tests from User Services', () => {
   });
 
   //Testes realacionados à procura de usuário(s)
-  describe('When a user is found successfully', () => {
+  describe('When a User is found successfully', () => {
     it('should return the users data', async () => {
         await userServices.createUser(newUser);
         const res = await userServices.findUser(newUser);
@@ -51,7 +51,15 @@ describe('Unit tests from User Services', () => {
         expect(res).to.have.property('success').to.be.equal(true);
     });
   });
+  describe('When a User is not found successfully', () => {
+    it('should return an object with property success: false', async () => {
+      const res = await userServices.findUser(newUser);
 
+      expect(res).to.be.an('object');
+      expect(res.success).to.be.equal(false);
+      expect(res.message).to.include('User not found');
+    });
+  });
 
 
 });

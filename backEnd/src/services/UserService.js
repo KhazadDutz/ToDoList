@@ -45,7 +45,6 @@ const findUser = async (user) => {
         [Op.or]: [{name: user.name}, {email: user.email}]
       }
     });
-
     if (!foundUser) {
       return { 
         success: false,
