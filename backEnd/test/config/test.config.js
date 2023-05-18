@@ -2,7 +2,7 @@
 const { exec } = require('child_process');
 
 // Array of table names in the order they need to be dropped and created
-const tableNames = ['Users'];
+const tableNames = ['Users', 'Tasks'];
 
 // Function to execute a migration command
 const executeMigrationCommand = async (command, tableName) => {

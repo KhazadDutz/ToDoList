@@ -40,7 +40,6 @@ const deleteUser = async(user) => {
 
 const findUser = async (user) => {
   try {
-    console.log("USHULLLLLL")
     const foundUser = await User.findOne({ 
       where: {
         [Op.or]: [{name: user.name}, {email: user.email}]
@@ -66,5 +65,6 @@ const findUser = async (user) => {
 
 module.exports = {
   createUser,
-  deleteUser
+  deleteUser,
+  findUser
 }
