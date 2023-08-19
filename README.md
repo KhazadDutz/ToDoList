@@ -4,6 +4,8 @@ This project aims to apply my knowledge using the following technologies:
 - Express;
 - MySQL;
 
+This project is currently under development; there has been a pause due to personal issues. However, I will be returning to its development as soon as possible.
+
 To view the project, follow the step-by-step instructions below:
 - Clone this repository: git clone git@github.com:KhazadDutz/ToDoList.git ;
 - Navigate to the project folder: cd ToDoList ;
